@@ -1,0 +1,14 @@
+
+.note {
+    @apply bg-gray-100;
+  .ql-container {
+    min-width: 100vw;
+    min-height: 100vh;
+
+    font-family: inherit; // Override default font family
+    // Selects editor when clicked on viewport
+    .ql-editor {
+        height: 99vh;
+    }
+  }
+}

@@ -1,12 +1,12 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.scss";
+import "./index.scss"
+import Note from "./components/note";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-       Dev Utils Note App 
-      </header>
+      {/* <header className="App-header">Dev Utils Note App</header> */}
+      <Note />
     </div>
   );
 }
