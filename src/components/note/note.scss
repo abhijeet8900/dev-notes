@@ -1,12 +1,30 @@
 .note {
-  @apply bg-gray-100;
+  @apply px-2;
+
+  @screen md {
+    @apply px-6;
+  }
+
+  @apply bg-gray-100; // Default background
+  min-height: inherit; // Set full height
   .ql-container {
-    min-width: 100vw;
-    min-height: 100vh;
+    min-width: 100%;
+    height: 100%;
+    font-size: 18px;
     font-family: inherit; // Override default font family
     // Selects editor when clicked on viewport
     .ql-editor {
-      height: 99vh;
+      min-height: 100vh;
+    }
+
+    /* Hide tooltip ( bug with bubble theme )  */
+    .ql-tooltip.ql-hidden {
+      position: fixed;
+      visibility: hidden;
     }
   }
+}
+
+.note.theme-paper {
+  background-color: #feff9c;
 }
