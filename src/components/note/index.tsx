@@ -1,21 +1,25 @@
 import "./note.scss";
 
+import cx from "classnames";
 import ReactQuill from "react-quill";
 import { useEffect, useState } from "react";
 import { useDebounce } from "use-debounce/lib";
 
-import { setLocalNotes, getLocalNotes } from "../../utils/notes";
-import { themeSwitcher, getDefaultTheme } from "../../utils/theme";
 import Menus from "../menus";
+import { Font } from "../../constants/fonts";
 import { Theme } from "../../constants/themes";
-import cx from 'classnames'
+import { setLocalNotes, getLocalNotes } from "../../utils/notes";
+import { fontSwitcher, getDefaultFont } from "../../utils/fonts";
+import { themeSwitcher, getDefaultTheme } from "../../utils/theme";
 
 const defaultTheme = getDefaultTheme();
+const defaultFont = getDefaultFont();
 
 const Note: React.FC = () => {
   const [text, setText] = useState("");
   const [autoSaveNotes] = useDebounce(text, 5000);
   const [theme, setTheme] = useState<Theme>(defaultTheme);
+  const [font, setFont] = useState<Font>(defaultFont);
 
   const menus = [
     {
@@ -28,13 +32,8 @@ const Note: React.FC = () => {
     {
       label: "Font",
       onClick: () => {
-        console.log("Font");
-      },
-    },
-    {
-      label: "Mark",
-      onClick: () => {
-        console.log("Mark");
+        const newFont: Font = fontSwitcher(font);
+        setFont(newFont);
       },
     },
     {
@@ -61,7 +60,7 @@ const Note: React.FC = () => {
   };
 
   return (
-    <div className={cx(`note-container`, theme.className)}>
+    <div className={cx(`note-container`, theme.className, font.className)}>
       <ReactQuill
         className="note"
         placeholder="Type your text...."
