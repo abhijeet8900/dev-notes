@@ -1,0 +1,21 @@
+.menus-container {
+  @apply fixed;
+
+  @apply hidden;
+  @screen md {
+    @apply flex;
+    @apply flex-col;
+    @apply mt-8;
+    @apply w-auto;
+    @apply top-0;
+    @apply right-0;
+  }
+}
+
+.menu {
+  text-shadow: 0px 0px 2px gray;
+  @apply cursor-pointer;
+  @apply drop-shadow-md;
+  @apply mx-2;
+  @apply my-2;
+}

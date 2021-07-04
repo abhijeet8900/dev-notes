@@ -5,10 +5,45 @@ import { useEffect, useState } from "react";
 import { useDebounce } from "use-debounce/lib";
 
 import { setLocalNotes, getLocalNotes } from "../../utils/notes";
+import { themeSwitcher, getDefaultTheme } from "../../utils/theme";
+import Menus from "../menus";
+import { Theme } from "../../constants/themes";
+import cx from 'classnames'
 
-const Note = () => {
+const defaultTheme = getDefaultTheme();
+
+const Note: React.FC = () => {
   const [text, setText] = useState("");
   const [autoSaveNotes] = useDebounce(text, 5000);
+  const [theme, setTheme] = useState<Theme>(defaultTheme);
+
+  const menus = [
+    {
+      label: "Theme",
+      onClick: () => {
+        const newTheme: Theme = themeSwitcher(theme);
+        setTheme(newTheme);
+      },
+    },
+    {
+      label: "Font",
+      onClick: () => {
+        console.log("Font");
+      },
+    },
+    {
+      label: "Mark",
+      onClick: () => {
+        console.log("Mark");
+      },
+    },
+    {
+      label: "Save",
+      onClick: () => {
+        console.log("Save");
+      },
+    },
+  ];
 
   /** Store notes in localstorage*/
   useEffect(() => {
@@ -26,7 +61,7 @@ const Note = () => {
   };
 
   return (
-    <div>
+    <div className={cx(`note-container`, theme.className)}>
       <ReactQuill
         className="note"
         placeholder="Type your text...."
@@ -34,6 +69,7 @@ const Note = () => {
         value={text}
         onChange={onChange}
       />
+      <Menus menus={menus} />
     </div>
   );
 };

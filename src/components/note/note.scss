@@ -11,7 +11,8 @@
     min-width: 100%;
     height: 100%;
     font-size: 18px;
-    font-family: inherit; // Override default font family
+    // Override default font family
+    font-family: inherit;
     // Selects editor when clicked on viewport
     .ql-editor {
       min-height: 100vh;
@@ -25,6 +26,32 @@
   }
 }
 
-.note.theme-paper {
-  background-color: #feff9c;
+/** Themes  */
+
+.theme-white {
+  .note {
+    transition: background-color 1.8s ease;
+    background-color: white;
+    transition: color 1.2s ease;
+    color: black;
+  }
+}
+
+/** TODO: Fix theme placeholder and other colors */
+.theme-dark {
+  .note {
+    transition: background-color 1.8s ease;
+    background-color: black;
+    transition: color 1.2s ease;
+    color: white;
+  }
+}
+
+.theme-paper {
+  .note {
+    transition: background-color 1.8s ease;
+    background-color: #feff9c;
+    transition: color 1.2s ease;
+    color: black;
+  }
 }
