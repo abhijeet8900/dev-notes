@@ -11,12 +11,14 @@ import { Theme } from "../../constants/themes";
 import { setLocalNotes, getLocalNotes } from "../../utils/notes";
 import { fontSwitcher, getDefaultFont } from "../../utils/fonts";
 import { themeSwitcher, getDefaultTheme } from "../../utils/theme";
+import { DeltaStatic, Sources } from "quill";
 
 const defaultTheme = getDefaultTheme();
 const defaultFont = getDefaultFont();
 
 const Note: React.FC = () => {
-  const [text, setText] = useState("");
+  const initialNotes = getLocalNotes();
+  const [text, setText] = useState<string | DeltaStatic>(initialNotes);
   const [autoSaveNotes] = useDebounce(text, 5000);
   const [theme, setTheme] = useState<Theme>(defaultTheme);
   const [font, setFont] = useState<Font>(defaultFont);
@@ -46,17 +48,16 @@ const Note: React.FC = () => {
 
   /** Store notes in localstorage*/
   useEffect(() => {
-    setLocalNotes(text);
+    if (text !== initialNotes) setLocalNotes(text);
   }, [autoSaveNotes]);
 
-  /** Set inital notes if available */
-  useEffect(() => {
-    const localNotes = getLocalNotes();
-    setText(localNotes);
-  }, []);
-
-  const onChange = (value: string) => {
-    setText(value);
+  const onChange = (
+    content: string,
+    delta: DeltaStatic,
+    source: Sources,
+    editor: any
+  ) => {
+    setText(editor.getContents());
   };
 
   return (
@@ -65,7 +66,7 @@ const Note: React.FC = () => {
         className="note"
         placeholder="Type your text...."
         theme="bubble"
-        value={text}
+        defaultValue={text}
         onChange={onChange}
       />
       <Menus menus={menus} />
