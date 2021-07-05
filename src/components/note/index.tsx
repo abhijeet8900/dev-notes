@@ -6,14 +6,13 @@ import { useDebounce } from "use-debounce/lib";
 import { useEffect, useRef, useState } from "react";
 
 import Menus from "../menus";
-import { saveAs } from "file-saver";
 import { DeltaStatic, Sources } from "quill";
 import { Font } from "../../constants/fonts";
 import { Theme } from "../../constants/themes";
-import { pdfExporter, RawOrParsedDelta } from "quill-to-pdf";
-import { setLocalNotes, getLocalNotes } from "../../utils/notes";
+import { RawOrParsedDelta } from "quill-to-pdf";
 import { fontSwitcher, getDefaultFont } from "../../utils/fonts";
 import { themeSwitcher, getDefaultTheme } from "../../utils/theme";
+import { setLocalNotes, getLocalNotes, exportNotes } from "../../utils/notes";
 
 const defaultTheme = getDefaultTheme();
 const defaultFont = getDefaultFont();
@@ -32,13 +31,7 @@ const Note: React.FC = () => {
     const quillDelta: RawOrParsedDelta = quillRef.current
       ?.getEditor()
       .getContents() as RawOrParsedDelta;
-    if (typeof quillDelta != "undefined") {
-      const pdfBlob = await pdfExporter.generatePdf(quillDelta);
-      const fileName = `notes-${new Date().toString()}`;
-      saveAs(pdfBlob, fileName);
-    } else {
-      console.error("Error Downloading notes");
-    }
+    exportNotes(quillDelta);
   };
 
   const menus = [
