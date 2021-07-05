@@ -7,6 +7,10 @@ import { useEffect, useRef, useState } from "react";
 
 import Menus from "../menus";
 import { DeltaStatic, Sources } from "quill";
+
+import FontIcon from "../icons/font";
+import ThemeIcon from "../icons/theme";
+import ExportIcon from "../icons/export";
 import { Font } from "../../constants/fonts";
 import { Theme } from "../../constants/themes";
 import { RawOrParsedDelta } from "quill-to-pdf";
@@ -36,6 +40,7 @@ const Note: React.FC = () => {
 
   const menus = [
     {
+      icon: <ThemeIcon className="text-gray-400 hover:text-gray-800" />,
       label: "Theme",
       onClick: () => {
         const newTheme: Theme = themeSwitcher(theme);
@@ -44,6 +49,7 @@ const Note: React.FC = () => {
     },
     {
       label: "Font",
+      icon: <FontIcon className=" text-gray-400 hover:text-gray-800" />,
       onClick: () => {
         const newFont: Font = fontSwitcher(font);
         setFont(newFont);
@@ -51,10 +57,8 @@ const Note: React.FC = () => {
     },
     {
       label: "Save",
-      onClick: () => {
-        onSave();
-        console.log("Save");
-      },
+      icon: <ExportIcon className=" text-gray-400 hover:text-gray-800" />,
+      onClick: onSave,
     },
   ];
 
