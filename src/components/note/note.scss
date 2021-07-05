@@ -34,13 +34,16 @@
   }
 }
 
-/** TODO: Fix theme placeholder and other colors */
 .theme-dark {
   .note {
     transition: background-color 1.8s ease;
     background-color: black;
     transition: color 1.2s ease;
     color: white;
+    /**  Sets placeholder font color */
+    .ql-container > .ql-editor.ql-blank::before {
+      color: white;
+    }
   }
 }
 
