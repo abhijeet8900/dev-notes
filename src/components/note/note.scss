@@ -37,7 +37,7 @@
 .theme-dark {
   .note {
     transition: background-color 1.8s ease;
-    background-color: black;
+    @apply bg-gray-800;
     transition: color 1.2s ease;
     color: white;
     /**  Sets placeholder font color */
