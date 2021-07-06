@@ -18,4 +18,8 @@
   @apply drop-shadow-md;
   @apply mx-4;
   @apply my-4;
+  svg {
+    @apply text-gray-400;
+    @apply hover:text-gray-800;
+  }
 }

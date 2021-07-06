@@ -43,7 +43,7 @@ const Note: React.FC = () => {
 
   const menus = [
     {
-      icon: <ThemeIcon className="text-gray-400 hover:text-gray-800" />,
+      icon: <ThemeIcon />,
       label: "Theme",
       onClick: () => {
         const newTheme: Theme = themeSwitcher(theme);
@@ -52,7 +52,7 @@ const Note: React.FC = () => {
     },
     {
       label: "Font",
-      icon: <FontIcon className=" text-gray-400 hover:text-gray-800" />,
+      icon: <FontIcon />,
       onClick: () => {
         const newFont: Font = fontSwitcher(font);
         setFont(newFont);
@@ -60,7 +60,7 @@ const Note: React.FC = () => {
     },
     {
       label: "Save",
-      icon: <ExportIcon className=" text-gray-400 hover:text-gray-800" />,
+      icon: <ExportIcon />,
       onClick: onSave,
     },
   ];
