@@ -13,9 +13,9 @@ interface props {
 
 const Menus = (props: props) => {
   return (
-    <div className="menus-container">
-      {props.menus.map((menu: menu) => (
-        <span onClick={menu.onClick} className="menu" aria-label="Text">
+    <div className="menus-container" >
+      {props.menus.map((menu: menu, index: number) => (
+        <span onClick={menu.onClick} className="menu"  key={`${menu.label}-${index}`}>
           {menu.icon}
         </span>
       ))}
