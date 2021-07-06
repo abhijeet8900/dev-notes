@@ -2,7 +2,7 @@ import "./note.scss";
 
 import cx from "classnames";
 import ReactQuill from "react-quill";
-import { useDebounce, useDebouncedCallback } from "use-debounce/lib";
+import { useDebouncedCallback } from "use-debounce/lib";
 import { useEffect, useRef, useState } from "react";
 
 import Menus from "../menus";
@@ -27,12 +27,9 @@ const Note: React.FC = () => {
   const [theme, setTheme] = useState<Theme>(defaultTheme);
   const [font, setFont] = useState<Font>(defaultFont);
 
-  const debounced = useDebouncedCallback(
-    (value) => {
-      setText(value);
-    },
-    4000
-  );
+  const debounced = useDebouncedCallback((value) => {
+    setText(value);
+  }, 4000);
 
   let quillRef = useRef<ReactQuill>(null);
 
@@ -71,7 +68,7 @@ const Note: React.FC = () => {
   /** Store notes in localstorage*/
   useEffect(() => {
     if (text !== initialNotes) setLocalNotes(text);
-  }, [text]);
+  }, [text, initialNotes]);
 
   const onChange = (
     content: string,
